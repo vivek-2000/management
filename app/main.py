@@ -1,6 +1,5 @@
 from fastapi import FastAPI, HTTPException, Depends
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.future import select
 from typing import List
@@ -17,7 +16,6 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 # Create SQLAlchemy engine and session
 engine = create_async_engine(DATABASE_URL, echo=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine, class_=AsyncSession)
-Base = declarative_base()
 
 app = FastAPI()
 
@@ -50,15 +48,15 @@ async def get_user(email: str, db: AsyncSession = Depends(get_db)):
 
 @app.patch("/update_users/{email}", response_model=UserRead)
 async def update_user(email: str, user_update: UpdateUser, db: AsyncSession = Depends(get_db)):
-    async with db.begin():
-        result = await db.execute(select(UserModel).where(UserModel.email == email))
-        user = result.scalars().first()
-        if not user:
-            raise HTTPException(status_code=404, detail="User not found")
-        for key, value in user_update.dict(exclude_unset=True).items():
-            setattr(user, key, value)
-        await db.commit()
-        await db.refresh(user)
+    result = await db.execute(select(UserModel).where(UserModel.email == email))
+    user = result.scalars().first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    for key, value in user_update.dict(exclude_unset=True).items():
+        setattr(user, key, value)
+    await db.commit()
+    await db.refresh(user)
+
     return UserRead.from_orm(user)
 
 @app.delete("/delete_users/{email}", response_model=dict)
