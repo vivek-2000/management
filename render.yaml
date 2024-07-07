@@ -1,0 +1,12 @@
+# Exported from Render on 2024-07-07T11:13:44Z
+databases:
+- name: user_db
+  databaseName: user_db_dtae
+  user: user_db_dtae_user
+  plan: free
+  region: frankfurt
+  ipAllowList:
+  - source: 0.0.0.0/0
+    description: everywhere
+  postgresMajorVersion: "16"
+version: "1"
