@@ -75,7 +75,7 @@ async def delete_user(email: str, db: AsyncSession = Depends(get_db)):
 @app.post("/send_invite")
 async def send_invite(email: EmailSchema):
     try:
-        await send_invitation_email(email.email)
+        await send_invitation_email(email.dict().get("email"))
         return {"message": "Invitation email has been sent"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"An unexpected error occurred while sending the email: {e}")

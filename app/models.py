@@ -1,5 +1,5 @@
 from pydantic import BaseModel, EmailStr
-from typing import Optional
+from typing import Optional, List
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -32,4 +32,4 @@ class UserRead(BaseModel):
         orm_mode = True
 
 class EmailSchema(BaseModel):
-    email: EmailStr
+    email: List[EmailStr]
