@@ -47,7 +47,7 @@ If you have any questions, feel free to reply to this email.
         <p>Hello,</p>
         <p>We are excited to invite you to view our User Management API documentation on <strong>ReDoc</strong>.</p>
         <p>You can access the documentation by clicking the button below:</p>
-        <a href="https://user-management.koyeb.app/redoc" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: white; background-color: #4CAF50; text-decoration: none; border-radius: 5px;">View API Documentation</a>
+        <a href="https://management-tgip.onrender.com/redoc" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: white; background-color: #4CAF50; text-decoration: none; border-radius: 5px;">View API Documentation</a>
         <p>I am not able to use GCP due to unavailability of credit card </p>
         <br>
         <p>Thank you,</p>
